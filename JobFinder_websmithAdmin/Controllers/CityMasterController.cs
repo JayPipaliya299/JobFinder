@@ -32,7 +32,7 @@ namespace JobFinder_websmithAdmin.Controllers
             }
             catch(Exception ex)
             {
-                return Json("Error : "+ex.Message,JsonRequestBehavior.AllowGet);
+                return Json("Error :"+ex.Message,JsonRequestBehavior.AllowGet);
             }
         }
         #endregion Get Data
@@ -60,7 +60,7 @@ namespace JobFinder_websmithAdmin.Controllers
             }
             catch(Exception ex)
             {
-                mRes.Outval = "Error: " + ex.Message;
+                mRes.Outval = "Error :" + ex.Message;
             }
             return Json(mRes, JsonRequestBehavior.AllowGet);
         }
@@ -86,7 +86,7 @@ namespace JobFinder_websmithAdmin.Controllers
             }
             catch(Exception ex)
             {
-                mRes.Outval = "Error: " + ex.Message;
+                mRes.Outval = "Error :" + ex.Message;
             }
             return Json(mRes, JsonRequestBehavior.AllowGet);
         }

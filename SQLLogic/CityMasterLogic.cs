@@ -30,6 +30,14 @@ namespace SQLLogic
         {
             return new SqlHelper().GetJsonObject("CityMaster_Get_GetAll", new object[,] { });
         }
+        public object CityMaster_Get_GetCityByStateIDP(int StateIDP)
+        {
+            return new SqlHelper().GetJsonObject("CityMaster_Get_GetCityByStateIDP", new object[,]
+            {
+                { "StateIDP",StateIDP }
+            });
+        }
+
         public MEMBERS.SQLReturnMessageNValue CityMaster_Insert_Update(CityMasterClass oClass)
         {
             return new SqlHelper().ExecuteProceduerWithMessageNValue("CityMaster_Insert_Update", new object[,]

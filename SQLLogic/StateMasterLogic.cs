@@ -32,6 +32,14 @@ namespace SQLLogic
             return new SqlHelper().GetJsonObject("StateMaster_Get_GetAll", new object[,] { });
         }
 
+        public object StateMaster_Get_GetStateByCountryIDP(int CountryIDP)
+        {
+            return new SqlHelper().GetJsonObject("StateMaster_Get_GetStateByCountryIDP", new object[,]
+            {
+                { "CountryIDP",CountryIDP }
+            });
+        }
+
         public MEMBERS.SQLReturnMessageNValue StateMaster_Insert_Update(StateMasterClass oClass)
         {
             return new SqlHelper().ExecuteProceduerWithMessageNValue("StateMaster_Insert_Update", new object[,]

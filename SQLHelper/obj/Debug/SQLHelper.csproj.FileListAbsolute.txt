@@ -7,3 +7,12 @@ E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLHelper\bin\Debug\Newtonsoft.Json.xml
 E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLHelper\obj\Debug\SQLHelper.csproj.CopyComplete
 E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLHelper\obj\Debug\SQLHelper.dll
 E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLHelper\obj\Debug\SQLHelper.pdb
+E:\Jay Pipaliya\backups\JobFinder\SQLHelper\bin\Debug\SQLHelper.dll
+E:\Jay Pipaliya\backups\JobFinder\SQLHelper\bin\Debug\SQLHelper.pdb
+E:\Jay Pipaliya\backups\JobFinder\SQLHelper\bin\Debug\Newtonsoft.Json.dll
+E:\Jay Pipaliya\backups\JobFinder\SQLHelper\bin\Debug\Newtonsoft.Json.xml
+E:\Jay Pipaliya\backups\JobFinder\SQLHelper\obj\Debug\SQLHelper.csproj.AssemblyReference.cache
+E:\Jay Pipaliya\backups\JobFinder\SQLHelper\obj\Debug\SQLHelper.csproj.CoreCompileInputs.cache
+E:\Jay Pipaliya\backups\JobFinder\SQLHelper\obj\Debug\SQLHelper.csproj.CopyComplete
+E:\Jay Pipaliya\backups\JobFinder\SQLHelper\obj\Debug\SQLHelper.dll
+E:\Jay Pipaliya\backups\JobFinder\SQLHelper\obj\Debug\SQLHelper.pdb

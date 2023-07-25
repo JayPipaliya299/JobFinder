@@ -4,3 +4,9 @@ E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\obj\Debug\SQLClass.csproj.Assembly
 E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\obj\Debug\SQLClass.csproj.CoreCompileInputs.cache
 E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\obj\Debug\SQLClass.dll
 E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\obj\Debug\SQLClass.pdb
+E:\Jay Pipaliya\backups\JobFinder\SQLClass\bin\Debug\SQLClass.dll
+E:\Jay Pipaliya\backups\JobFinder\SQLClass\bin\Debug\SQLClass.pdb
+E:\Jay Pipaliya\backups\JobFinder\SQLClass\obj\Debug\SQLClass.csproj.AssemblyReference.cache
+E:\Jay Pipaliya\backups\JobFinder\SQLClass\obj\Debug\SQLClass.csproj.CoreCompileInputs.cache
+E:\Jay Pipaliya\backups\JobFinder\SQLClass\obj\Debug\SQLClass.dll
+E:\Jay Pipaliya\backups\JobFinder\SQLClass\obj\Debug\SQLClass.pdb

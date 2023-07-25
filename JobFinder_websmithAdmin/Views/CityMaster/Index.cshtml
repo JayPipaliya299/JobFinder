@@ -8,7 +8,7 @@
     <input type="hidden" name="CityIDP" id="CityIDP" value="0" />
     <label for="StateIDF">State Name</label>
     <select class="form-control" name="StateIDF" id="StateIDF">
-        <option value="0">---Select a State---</option>
+        <option value="0">-- Select State --</option>
         @{
             if (ViewBag.lstState != null)
             {
@@ -74,7 +74,7 @@
                             iHTML += "<tr>";
                             iHTML += "<td style='width:2%'>" + objData[i].SrNo + "</td>";
                             iHTML += "<td style='width:12%'>" + objData[i].CityName + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].StateName + "</td>"
+                            iHTML += "<td style='width:12%'>" + objData[i].StateName + "</td>";
                             iHTML += '<td style="width:12%"><button class="btn btn-' + (objData[i].IsActive == true ? "success" : "danger") + '" onclick="GeneralAction(&quot;' + objData[i].CityIDP + '&quot;,&quot;1&quot;)">&nbsp;' + (objData[i].IsActive == true ? "Active" : "DeActive") + '</button></td>';
                             iHTML += '<td style="width:18%"><button class="btn btn-info w-sd" id=' + objData[i].CityIDP + ' onclick="Get(' + objData[i].CityIDP + ')">Edit</button>';
                             iHTML += '&nbsp;<button id="DeleteRecord" class="btn btn-danger' + '" onclick="GeneralAction(&quot;' + objData[i].CityIDP + '&quot;,&quot;2&quot;)">&nbsp;' + (objData[i].IsDelete == true ? "Delete" : "Delete") + '</button></td>';

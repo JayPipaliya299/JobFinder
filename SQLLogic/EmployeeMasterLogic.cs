@@ -1,4 +1,5 @@
-﻿using SQLHelper;
+﻿using SQLClass;
+using SQLHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,26 @@ namespace SQLLogic
             {
                 {"RowsPerPage",RowsPerPage },
                 {"PageNumber",PageNumber }
+            });
+        }
+
+        public MEMBERS.SQLReturnMessageNValue EmployeeMaster_Insert_Update(EmployeeMasterClass oClass)
+        {
+            return new SqlHelper().ExecuteProceduerWithMessageNValue("EmployeeMaster_Insert_Update", new object[,]
+            {
+                {"EmployeeIDP", oClass.EmployeeIDP }
+                , {"EmployeeName", oClass.EmployeeName}
+                , {"EmployeeAge", oClass.EmployeeAge}
+                , {"EmployeeEmail", oClass.EmployeeEmail}
+                , {"EmployeeMobileNumber", oClass.EmployeeMobileNumber}
+                , {"EmployeeGender", oClass.EmployeeGender}
+                , {"CountryIDF", oClass.CountryIDF}
+                , {"StateIDF", oClass.StateIDF}
+                , {"CityIDF",oClass.CityIDF}
+                , {"JobExperienceIDF", oClass.JobExperienceIDF}
+                , {"SkillIDF", oClass.SkillIDF}
+                , {"EmployeeDomain", oClass.EmployeeDomain}
+                , {"UserIDF", oClass.CreatedBy}
             });
         }
     }

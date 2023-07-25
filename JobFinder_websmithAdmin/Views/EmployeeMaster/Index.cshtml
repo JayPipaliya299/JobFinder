@@ -7,8 +7,8 @@
     <br />
     <input type="hidden" name="EmployeeIDP" id="EmployeeIDP" value="0" />
     <label for="CountryIDF">Country Name</label>
-    <select class="form-control" name="CountryIDF" id="CountryIDF">
-        <option value="0">---Select a Country---</option>
+    <select class="form-control" name="CountryIDF" id="CountryIDF" onchange="GetState()">
+        <option value="0">-- Select Country --</option>
         @{
             if (ViewBag.lstCountry != null)
             {
@@ -21,36 +21,39 @@
     </select>
     <br />
     <label for="StateIDF">State Name</label>
-    <select class="form-control" name="StateIDF" id="StateIDF">
-        <option value="0">---Select a State---</option>
-        @{
-            if (ViewBag.lstState != null)
-            {
-                foreach (SQLClass.StateCityClass item in ViewBag.lstState)
-                {
-                    <option value="@item.StateIDP">@item.StateName</option>
-                }
-            }
-        }
+    <select class="form-control" name="StateIDF" id="StateIDF" onchange="GetCity()">
+        <option value="0">-- Select State --</option>
     </select>
     <br />
     <label for="CityIDF">City Name</label>
     <select class="form-control" name="CityIDF" id="CityIDF">
-        <option value="0">---Select a City---</option>
-        @{
-            if (ViewBag.lstCity != null)
-            {
-                foreach (SQLClass.CityEmployeeClass item in ViewBag.lstCity)
-                {
-                    <option value="@item.CityIDP">@item.CityName</option>
-                }
-            }
-        }
+        <option value="0">-- Select City --</option>
     </select>
+    <br />
+
+    <label for="EmployeeName">Name</label>
+    <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" placeholder="Enter Employee Name" maxlength="70" onkeydown="return /[a-z\s]/i.test(event.key)" />
+    <br />
+    <label for="EmployeeAge">Age</label>
+    <input type="text" class="form-control" id="EmployeeAge" name="EmployeeAge" placeholder="Enter Employee Age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" />
+    <br />
+    <label for="EmployeeEmail">Email</label>
+    <input type="text" class="form-control" id="EmployeeEmail" name="EmployeeEmail" placeholder="Enter Employee Email" />
+    <br />
+    <label for="EmployeeMobileNumber">Mobile Number</label>
+    <input type="text" class="form-control" id="EmployeeMobileNumber" name="EmployeeMobileNumber" placeholder="Enter EmployeeMobile Number" maxlength="10"
+           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+    <br />
+    <label for="EmployeeGender">Gender</label><br />
+    <input type="radio" name="Gender" value="1" id="EmployeeGender" />&nbsp;Male&nbsp;&nbsp;
+    <input type="radio" name="Gender" value="0" id="EmployeeGender" />&nbsp;Female
+    <br />
+    <label for="EmployeeDomain">Domain</label>
+    <input type="text" class="form-control" id="EmployeeDomain" name="EmployeeDomain" placeholder="Enter Employee Domain" maxlength="30" onkeydown="return /[a-z\s]/i.test(event.key)" />
     <br />
     <label for="JobExperienceIDF">Job Experience</label>
     <select class="form-control" name="JobExperienceIDF" id="JobExperienceIDF">
-        <option value="0">---Select a Job Experience---</option>
+        <option value="0">-- Select Job Experience --</option>
         @{
             if (ViewBag.lstJobExperience != null)
             {
@@ -62,10 +65,285 @@
         }
     </select>
     <br />
-    <label for="EmployeeName">Employee Name</label>
-    <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" placeholder="Enter Employee Name" maxlength="70" onkeydown="return /[a-z]/i.test(event.key)" />
-    <br/>
-    <label for="EmployeeAge">Employee Age</label>
-    <input type="text" class="form-control" id="EmployeeAge" name="EmployeeAge" placeholder="Enter Employee Age" onkeydown="return /[0-9]/i.test(event.key)" />
+    <label for="SkillIDF">Skills</label><br />
+    <input type="checkbox" class="chkAllSkill" /> Select All <br />
+    @foreach (SQLClass.SkillEmployeeClass item in @ViewBag.lstSkill)
+    {
+        <input type="checkbox" class="chkSkill" value="@item.SkillIDP" name="SkillIDF" /><text>&nbsp;</text>@item.SkillName;
+        <text>&nbsp; &nbsp;</text>
+
+    }
+    <input type="hidden" id="chkSkillIDF" />
 </div>
+<div class="form-group">
+    <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+</div>
+
+<div class="row">
+    <table id="datatable" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Sr.No</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th>Gender</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Skills</th>
+                <th>Job Experience</th>
+                <th>Work Domain</th>
+                <th>Status</th>
+                <th>Action</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody id="Data">
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            GetData(10, 1)
+        });
+
+        var CountryIDF = '';
+        var StateIDF = '';
+
+        function validateEmail(Email) {
+            var expr = /^[a-zA-Z0-9._]+[a-zA-Z0-9]+@@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/;
+            if (expr.test(Email)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        function validateContactNo(ContactNo) {
+            var expr = /^\d{10}$/;
+            if (expr.test(ContactNo)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        $(".chkSkill").click(function () {
+            $('#chkSkillIDF').val('');
+            var str = "";
+            $('.chkSkill').each(function () {
+                if (this.checked) {
+                    str += $(this).val() + ',';
+                }
+            });
+            var lastChar = str.slice(-1);
+            if (lastChar == ',') {
+                str = str.slice(0, -1);
+            }
+            console.log(str);
+            $('#chkSkillIDF').val(str);
+        });
+
+        $(".chkAllSkill").click(function () {
+            $('.chkSkill').not(this).prop('checked', this.checked);
+
+            if (this.checked) {
+                $('#chkSkillIDF').val('');
+                var str = "";
+                $('.chkSkill').each(function () {
+                    if (this.checked) {
+                        str += $(this).val() + ',';
+                    }
+                });
+                var lastChar = str.slice(-1);
+                if (lastChar == ',') {
+                    str = str.slice(0, -1);
+                }
+                console.log(str);
+                $('#chkSkillIDF').val(str);
+            }
+            else {
+                console.log('');
+                $('#chkSkillIDF').val('');
+            }
+        });
+
+
+        function GetData(RowsPerPage, PageNumber) {
+            var mData = {
+                RowsPerPage: RowsPerPage,
+                PageNumber: PageNumber
+            };
+            $.ajax({
+                type: "POST",
+                url: "/EmployeeMaster/EmployeeMaster_Get_GetAllPagging",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (mRes) {
+                    var obj = JSON.parse(mRes);
+                    var objData = obj[0].Data;
+                    var iHTML = "";
+
+                    if (objData.length == 0) {
+                        $("#Data").html("<tr><td colspan='15' align='center'>No Data</td></tr>")
+                    }
+                    else {
+                        for (var i = 0; i < objData.length; i++) {
+                            iHTML += "<tr>";
+                            iHTML += "<td style='width:2%'>" + objData[i].SrNo + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeName + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeAge + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeEmail + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeMobileNumber + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeGender + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].CountryName + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].StateName + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].CityName + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].JobExperienceName + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].SkillName + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeDomain + "</td>";
+                            iHTML += '<td style="width:12%"><button class="btn btn-' + (objData[i].IsActive == true ? "success" : "danger") + '" onclick="GeneralAction(&quot;' + objData[i].EmployeeIDP + '&quot;,&quot;1&quot;)">&nbsp;' + (objData[i].IsActive == true ? "Active" : "DeActive") + '</button></td>';
+                            iHTML += '<td style="width:18%"><button class="btn btn-info w-sd" id=' + objData[i].EmployeeIDP + ' onclick="Get(' + objData[i].EmployeeIDP + ')">Edit</button>';
+                            iHTML += '&nbsp;<button id="DeleteRecord" class="btn btn-danger' + '" onclick="GeneralAction(&quot;' + objData[i].EmployeeIDP + '&quot;,&quot;2&quot;)">&nbsp;' + (objData[i].IsDelete == true ? "Delete" : "Delete") + '</button></td>';
+                            iHTML += "<td style='width:12%'>" + objData[i].CreatedDateTime + "</td>";
+                            iHTML += "</tr>";
+                        }
+                        $("#Data").html(iHTML);
+                    }
+                }
+            })
+        }
+
+        function Save() {
+
+            if ($("#EmployeeEmail").val() != "") {
+                if (!validateEmail($("#EmployeeEmail").val())) {
+                    alert('Please Enter Valid Email e.g abc@domain.com');
+                    return false;
+                }
+            }
+
+            if ($("#EmployeeMobileNumber").val() != "") {
+                if (!validateContactNo($("#EmployeeMobileNumber").val())) {
+                    alert('please enter valid contactno e.g xxxxxxxxxx');
+                    return false;
+                }
+            }
+
+            var mData = {
+                EmployeeIDP: $("#EmpoloyeeIDP").val(),
+                CountryIDF: $("#CountryIDF").val(),
+                StateIDF: $("#StateIDF").val(),
+                CityIDF: $("#CityIDF").val(),
+                EmployeeName: $("#EmployeeName").val(),
+                EmployeeAge: $("#EmployeeAge").val(),
+                EmployeeEmail: $("#EmployeeEmail").val(),
+                EmployeeMobileNumber: $("#EmployeeMobileNumber").val(),
+                EmployeeGender: $("#EmployeeGender").val(),
+                EmployeeDomain: $("#EmployeeDomain").val(),
+                JobExperienceIDF: $("#JobExperienceIDF").val(),
+                SkillIDF: $("#chkSkillIDF").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "/EmployeeMaster/EmployeeMaster_Insert_Update",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    if (result.Outval == 1) {
+                        GetData(10, 1);
+                        $("#btnSubmit").text("Save");
+                        ClearControls();
+                        alert(result.Outmsg);
+                    }
+                    else {
+                        alert(result.Outmsg);
+                    }
+                }
+            });
+        }
+
+        function ClearControls() {
+            $("#EmpoloyeeIDP").val(0);
+            $("#CountryIDF").val(0);
+            $("#StateIDF").val(0);
+            $("#CityIDF").val(0);
+            $("#EmployeeName").val("");
+            $("#EmployeeAge").val("");
+            $("#EmployeeEmail").val("");
+            $("#EmployeeMobileNumber").val("");
+            $("#EmployeeGender").val("");
+            $("#EmployeeDomain").val("");
+            $("#JobExperienceIDF").val(0);
+            $('#chkSkillIDF').val('')
+        }
+
+        function GetState() {
+            var mData = {
+                CountryIDP: $("#CountryIDF").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "/EmployeeMaster/StateMaster_Get_GetStateByCountryIDP",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (mRes) {
+                    var iHTML = '';
+                    iHTML += '<option value="0">-- Select State --</option>'
+
+                    if (mRes.length > 0) {
+                        for (var i = 0; i < mRes.length; i++) {
+                            if (mRes[i].StateIDP == StateIDF) {
+                                iHTML += '<option value="' + mRes[i].StateIDP + '" selected>' + mRes[i].StateName + '</option>'
+                                GetCity();
+                            }
+                            else {
+                                iHTML += '<option value="' + mRes[i].StateIDP + '">' + mRes[i].StateName + '</option>';
+                            }
+                        }
+                    }
+                    $("#StateIDF").html(iHTML);
+                }
+            });
+        }
+
+        function GetCity() {
+            var mData = {
+                StateIDP: $("#StateIDF").val()
+            };
+            $.ajax({
+                type: "POST",
+                url: "/EmployeeMaster/CityMaster_Get_GetCityByStateIDP",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (mRes) {
+                    var iHTML = '';
+                    iHTML += '<option value="0">-- Select City --</option>'
+
+                    if (mRes.length > 0) {
+                        for (var i = 0; i < mRes.length; i++) {
+                            if (mRes[i].CityIDP == CityIDF) {
+                                iHTML += '<option value="' + mRes[i].CityIDP + '" selected>' + mRes[i].CityName + '</option>'
+                            }
+                            else {
+                                iHTML += '<option value="' + mRes[i].CityIDP + '">' + mRes[i].CityName + '</option>';
+                            }
+                        }
+                    }
+                    $("#CityIDF").html(iHTML);
+                }
+            });
+        }
+    </script>
+}
 
