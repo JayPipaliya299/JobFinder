@@ -1,0 +1,13 @@
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\obj\Debug\SQLLogic.csproj.AssemblyReference.cache
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\obj\Debug\SQLLogic.csproj.CoreCompileInputs.cache
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\bin\Debug\SQLLogic.dll
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\bin\Debug\SQLLogic.pdb
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\bin\Debug\SQLClass.dll
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\bin\Debug\SQLHelper.dll
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\bin\Debug\Newtonsoft.Json.dll
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\bin\Debug\SQLClass.pdb
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\bin\Debug\SQLHelper.pdb
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\bin\Debug\Newtonsoft.Json.xml
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\obj\Debug\SQLLogic.csproj.CopyComplete
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\obj\Debug\SQLLogic.dll
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLLogic\obj\Debug\SQLLogic.pdb

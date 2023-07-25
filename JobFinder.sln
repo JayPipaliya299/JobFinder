@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobFinder_websmithAdmin", "JobFinder_websmithAdmin\JobFinder_websmithAdmin.csproj", "{2501A92C-1274-4060-B689-FDFBD4B194BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLClass", "SQLClass\SQLClass.csproj", "{FBD3049E-9BC6-4669-B13F-6810E477C206}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLLogic", "SQLLogic\SQLLogic.csproj", "{12D4E8A1-EEE1-44A9-9541-D095835469A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLHelper", "SQLHelper\SQLHelper.csproj", "{512AF4DD-B972-45D0-820E-1CE66B2340EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2501A92C-1274-4060-B689-FDFBD4B194BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2501A92C-1274-4060-B689-FDFBD4B194BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2501A92C-1274-4060-B689-FDFBD4B194BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2501A92C-1274-4060-B689-FDFBD4B194BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBD3049E-9BC6-4669-B13F-6810E477C206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBD3049E-9BC6-4669-B13F-6810E477C206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBD3049E-9BC6-4669-B13F-6810E477C206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBD3049E-9BC6-4669-B13F-6810E477C206}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D4E8A1-EEE1-44A9-9541-D095835469A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D4E8A1-EEE1-44A9-9541-D095835469A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D4E8A1-EEE1-44A9-9541-D095835469A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D4E8A1-EEE1-44A9-9541-D095835469A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512AF4DD-B972-45D0-820E-1CE66B2340EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512AF4DD-B972-45D0-820E-1CE66B2340EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512AF4DD-B972-45D0-820E-1CE66B2340EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512AF4DD-B972-45D0-820E-1CE66B2340EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A0941B0-8EF8-4C28-9CDE-E122A9BF6E6F}
+	EndGlobalSection
+EndGlobal

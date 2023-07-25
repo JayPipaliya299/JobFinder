@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="form-group">
+    <br />
+    <input type="hidden" name="StateIDP" id="StateIDP" value="0" />
+    <lable for="CountryIDF">Country Name</lable>
+    <select class="form-control" name="CountryIDF" id="CountryIDF">
+        <option value="0">-- Select Country --</option>
+        @{
+            if (ViewBag.lstCountry != null)
+            {
+                foreach (SQLClass.CountryStateClass item in ViewBag.lstCountry)
+                {
+                    <option value="@item.CountryIDP">@item.CountryName</option>
+                }
+            }
+        }
+    </select>
+    <br />
+    <label for="StateName">State Name</label>
+    <input type="text" class="form-control" id="StateName" name="StateName" placeholder="Enter State Name" />
+</div>
+<div class="form-group">
+    <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+</div>
+
+<div class="row">
+    <table id="datatable" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Sr.No</th>
+                <th>StateName</th>
+                <th>CountryName</th>
+                <th>IsActive</th>
+                <th>Action</th>
+                <th>Created Date</th>
+            </tr>
+        </thead>
+        <tbody id="Data">
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            GetData(10, 1);
+        });
+
+        function GetData(RowsPerPage, PageNumber) {
+            var mData = {
+                RowsPerPage: RowsPerPage,
+                PageNumber: PageNumber
+            }
+            $.ajax({
+                type: "POST",
+                url: "/StateMaster/StateMaster_Get_GetAllPagging",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (mRes) {
+                    var obj = JSON.parse(mRes);
+                    var objData = obj[0].Data;
+                    var iHTML = "";
+
+                    if (objData.length == 0) {
+                        $("#Data").html("<tr><td colspan='6' align='center'>No Data</td></tr>")
+                    }
+
+                    else {
+                        for (var i = 0; i < objData.length; i++) {
+                            iHTML += "<tr>";
+                            iHTML += "<td style='width:2%'>" + objData[i].SrNo + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].StateName + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].CountryName + "</td>"
+                            iHTML += '<td style="width:12%"><button class="btn btn-' + (objData[i].IsActive == true ? "success" : "danger") + '" onclick="GeneralAction(&quot;' + objData[i].StateIDP + '&quot;,&quot;1&quot;)">&nbsp;' + (objData[i].IsActive == true ? "Active" : "DeActive") + '</button></td>';
+                            iHTML += '<td style="width:18%"><button class="btn btn-info w-sd" id=' + objData[i].StateIDP + ' onclick="Get(' + objData[i].StateIDP + ')">Edit</button>';
+                            iHTML += '&nbsp;<button id="DeleteRecord" class="btn btn-danger' + '" onclick="GeneralAction(&quot;' + objData[i].StateIDP + '&quot;,&quot;2&quot;)">&nbsp;' + (objData[i].IsDelete == true ? "Delete" : "Delete") + '</button></td>';
+                            iHTML += "<td style='width:12%'>" + objData[i].CreatedDateTime + "</td>";
+                            iHTML += "</tr>";
+                        }
+                        $("#Data").html(iHTML);
+                    }
+                }
+            })
+        }
+
+        function Get(id) {
+            var mData = { StateIDP: id }
+            $.ajax({
+                type: "POST",
+                url: "/StateMaster/StateMaster_Get_GetByID",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (mRes) {
+                    var obj = JSON.parse(mRes);
+                    $("#StateIDP").val(obj[0].StateIDP);
+                    $("#CountryIDF").val(obj[0].CountryIDF).trigger('change');
+                    $("#StateName").val(obj[0].StateName);
+                    $("#btnSubmit").text("Edit");
+                },
+            });
+        }
+
+        function Save() {
+            debugger;
+            var mData = {
+                StateIDP: $("#StateIDP").val(),
+                CountryIDF: $("#CountryIDF").val(),
+                StateName: $("#StateName").val(),
+            }
+            $.ajax({
+                type: "POST",
+                url: "/StateMaster/StateMaster_Insert_Update",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (result) {
+                    if (result.Outval == 1) {
+                        GetData(10, 1);
+                        $("#btnSubmit").text("Save");
+                        ClearControls();
+                        alert(result.Outmsg);
+                    }
+                    else {
+                        alert(result.Outmsg);
+                    }
+                },
+            });
+        }
+
+        function GeneralAction(id, ActionType) {
+            var Id = {
+                StateIDP: id,
+                ActionType: ActionType,
+            };
+            var check;
+            if (ActionType == 1) {
+                check = confirm("Are you sure want to change a staus ?");
+            }
+            else {
+                check = confirm("Are you sure want to delete ?");
+            }
+            if (check) {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "/StateMaster/StateMaster_GeneralAction",
+                    data: JSON.stringify(Id),
+                    success: function (mRes) {
+                        if (mRes.Outval == 1) {
+                            GetData(10, 1);
+                            alert(mRes.Outmsg);
+                        }
+                        else {
+                            alert(mRes.Outmsg);
+                        }
+                    }
+                });
+            }
+            return true;
+        }
+
+        function ClearControls() {
+            $("#StateIDP").val(0);
+            $("#CountryIDF").val(0);
+            $("#StateName").val("");
+        }
+    </script>
+}

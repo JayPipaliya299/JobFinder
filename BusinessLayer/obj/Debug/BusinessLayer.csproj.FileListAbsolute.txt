@@ -1,0 +1,6 @@
+E:\Jay Pipaliya\netCoreMVC\JobFinder\BusinessLayer\bin\Debug\BusinessLayer.dll
+E:\Jay Pipaliya\netCoreMVC\JobFinder\BusinessLayer\bin\Debug\BusinessLayer.pdb
+E:\Jay Pipaliya\netCoreMVC\JobFinder\BusinessLayer\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+E:\Jay Pipaliya\netCoreMVC\JobFinder\BusinessLayer\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+E:\Jay Pipaliya\netCoreMVC\JobFinder\BusinessLayer\obj\Debug\BusinessLayer.dll
+E:\Jay Pipaliya\netCoreMVC\JobFinder\BusinessLayer\obj\Debug\BusinessLayer.pdb

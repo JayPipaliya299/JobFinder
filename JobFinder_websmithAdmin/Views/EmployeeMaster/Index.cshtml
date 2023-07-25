@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="form-group">
+    <br />
+    <input type="hidden" name="EmployeeIDP" id="EmployeeIDP" value="0" />
+    <label for="CountryIDF">Country Name</label>
+    <select class="form-control" name="CountryIDF" id="CountryIDF">
+        <option value="0">---Select a Country---</option>
+        @{
+            if (ViewBag.lstCountry != null)
+            {
+                foreach (SQLClass.CountryStateClass item in ViewBag.lstCountry)
+                {
+                    <option value="@item.CountryIDP">@item.CountryName</option>
+                }
+            }
+        }
+    </select>
+    <br />
+    <label for="StateIDF">State Name</label>
+    <select class="form-control" name="StateIDF" id="StateIDF">
+        <option value="0">---Select a State---</option>
+        @{
+            if (ViewBag.lstState != null)
+            {
+                foreach (SQLClass.StateCityClass item in ViewBag.lstState)
+                {
+                    <option value="@item.StateIDP">@item.StateName</option>
+                }
+            }
+        }
+    </select>
+    <br />
+    <label for="CityIDF">City Name</label>
+    <select class="form-control" name="CityIDF" id="CityIDF">
+        <option value="0">---Select a City---</option>
+        @{
+            if (ViewBag.lstCity != null)
+            {
+                foreach (SQLClass.CityEmployeeClass item in ViewBag.lstCity)
+                {
+                    <option value="@item.CityIDP">@item.CityName</option>
+                }
+            }
+        }
+    </select>
+    <br />
+    <label for="JobExperienceIDF">Job Experience</label>
+    <select class="form-control" name="JobExperienceIDF" id="JobExperienceIDF">
+        <option value="0">---Select a Job Experience---</option>
+        @{
+            if (ViewBag.lstJobExperience != null)
+            {
+                foreach (SQLClass.JobExperienceEmployeeClass item in ViewBag.lstJobExperience)
+                {
+                    <option value="@item.JobExperienceIDP">@item.JobExperienceName</option>
+                }
+            }
+        }
+    </select>
+    <br />
+    <label for="EmployeeName">Employee Name</label>
+    <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" placeholder="Enter Employee Name" maxlength="70" onkeydown="return /[a-z]/i.test(event.key)" />
+    <br/>
+    <label for="EmployeeAge">Employee Age</label>
+    <input type="text" class="form-control" id="EmployeeAge" name="EmployeeAge" placeholder="Enter Employee Age" onkeydown="return /[0-9]/i.test(event.key)" />
+</div>
+

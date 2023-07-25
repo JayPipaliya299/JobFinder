@@ -1,0 +1,6 @@
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\bin\Release\SQLClass.dll
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\bin\Release\SQLClass.pdb
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\obj\Release\SQLClass.csproj.AssemblyReference.cache
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\obj\Release\SQLClass.csproj.CoreCompileInputs.cache
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\obj\Release\SQLClass.dll
+E:\Jay Pipaliya\netCoreMVC\JobFinder\SQLClass\obj\Release\SQLClass.pdb
