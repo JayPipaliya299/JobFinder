@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace JobFinder_websmithAdmin.Controllers
 {
+    [Authorize]
     public class EmployeeMasterController : Controller
     {
         // GET: EmployeeMaster
@@ -120,7 +121,7 @@ namespace JobFinder_websmithAdmin.Controllers
                     return Json(mRes, JsonRequestBehavior.AllowGet);
                 }
 
-                if (string.IsNullOrEmpty(oClass.EmployeeGender))
+                if (oClass.EmployeeGender==0)
                 {
                     mRes.Outval = 0;
                     mRes.Outmsg = "Please select a gender";
@@ -158,5 +159,31 @@ namespace JobFinder_websmithAdmin.Controllers
             return Json(mRes, JsonRequestBehavior.AllowGet);
         }
         #endregion Save Data
+
+        #region Get Data By ID
+        public JsonResult EmployeeMaster_Get_GetByID(int EmployeeIDP)
+        {
+            object data = new EmployeeMasterLogic().EmployeeMaster_Get_GetByID(EmployeeIDP);
+            return Json(data.ToString(), JsonRequestBehavior.AllowGet);
+        }
+        #endregion Get Data By ID
+
+        #region Delete Data By ID
+        [HttpPost]
+        public JsonResult EmployeeMaster_GeneralAction(int EmployeeIDP,int ActionType)
+        {
+            MEMBERS.SQLReturnMessageNValue mRes;
+            try
+            {
+                Guid UserIDF = Guid.Parse(User.Identity.GetUserId());
+                mRes = new EmployeeMasterLogic().EmployeeMaster_GeneralAction(EmployeeIDP,ActionType,UserIDF);
+            }
+            catch(Exception ex)
+            {
+                mRes.Outval = "Error :" + ex.Message;
+            }
+            return Json(mRes, JsonRequestBehavior.AllowGet);
+        }
+        #endregion Delete Data By ID
     }
 }

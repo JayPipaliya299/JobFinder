@@ -3,112 +3,161 @@
     ViewBag.Title = "Index";
 }
 
-<div class="form-group">
-    <br />
-    <input type="hidden" name="EmployeeIDP" id="EmployeeIDP" value="0" />
-    <label for="CountryIDF">Country Name</label>
-    <select class="form-control" name="CountryIDF" id="CountryIDF" onchange="GetState()">
-        <option value="0">-- Select Country --</option>
-        @{
-            if (ViewBag.lstCountry != null)
-            {
-                foreach (SQLClass.CountryStateClass item in ViewBag.lstCountry)
+<div style="margin-bottom:8%;margin-top:5%;">
+    <div class="form-group">
+        <br />
+        <input type="hidden" name="EmployeeIDP" id="EmployeeIDP" value="0" />
+        <label for="CountryIDF">Country Name</label>
+        <select class="form-control" name="CountryIDF" id="CountryIDF" onchange="GetState()">
+            <option value="0">-- Select Country --</option>
+            @{
+                if (ViewBag.lstCountry != null)
                 {
-                    <option value="@item.CountryIDP">@item.CountryName</option>
+                    foreach (SQLClass.CountryStateClass item in ViewBag.lstCountry)
+                    {
+                        <option value="@item.CountryIDP">@item.CountryName</option>
+                    }
+                }
+            }
+        </select>
+        <br />
+        <label for="StateIDF">State Name</label>
+        <select class="form-control" name="StateIDF" id="StateIDF" onchange="GetCity('')">
+            <option value="0">-- Select State --</option>
+        </select>
+        <br />
+        <label for="CityIDF">City Name</label>
+        <select class="form-control" name="CityIDF" id="CityIDF">
+            <option value="0">-- Select City --</option>
+        </select>
+        <br />
+
+        <label for="EmployeeName">Name</label>
+        <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" placeholder="Enter Employee Name" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
+        <br />
+        <label for="EmployeeAge">Age</label>
+        <input type="text" class="form-control" id="EmployeeAge" name="EmployeeAge" placeholder="Enter Employee Age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" />
+        <br />
+        <label for="EmployeeEmail">Email</label>
+        <input type="text" class="form-control" id="EmployeeEmail" name="EmployeeEmail" placeholder="Enter Employee Email" maxlength="100" />
+        <br />
+        <label for="EmployeeMobileNumber">Mobile Number</label>
+        <input type="text" class="form-control" id="EmployeeMobileNumber" name="EmployeeMobileNumber" placeholder="Enter EmployeeMobile Number" maxlength="20"
+               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+        <br />
+        <label for="EmployeeGender">Gender</label><br />
+        <input type="radio" name="Gender" value="1" id="EmployeeGenderM" />&nbsp;Male&nbsp;&nbsp;
+        <input type="radio" name="Gender" value="2" id="EmployeeGenderF" />&nbsp;Female
+        <br />
+        <label for="EmployeeDomain">Domain</label>
+        <input type="text" class="form-control" id="EmployeeDomain" name="EmployeeDomain" placeholder="Enter Employee Domain" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
+        <br />
+        <label for="JobExperienceIDF">Job Experience</label>
+        <select class="form-control" name="JobExperienceIDF" id="JobExperienceIDF">
+            <option value="0">-- Select Job Experience --</option>
+            @{
+                if (ViewBag.lstJobExperience != null)
+                {
+                    foreach (SQLClass.JobExperienceEmployeeClass item in ViewBag.lstJobExperience)
+                    {
+                        <option value="@item.JobExperienceIDP">@item.JobExperienceName</option>
+                    }
+                }
+            }
+        </select>
+        <br />
+        <label for="SkillIDF">Skills</label><br />
+        <input type="hidden" id="chkSkillIDF" />
+        <input type="checkbox" class="chkAllSkill" name="chkSkillAll" /> Select All <br />
+        @{
+            if (ViewBag.lstSkill != null)
+            {
+                foreach (SQLClass.SkillEmployeeClass item in ViewBag.lstSkill)
+                {
+                    <input type="checkbox" class="chkSkill" value="@item.SkillIDP" name="SkillIDF" /><text>&nbsp;</text>@item.SkillName;
+                    <text>&nbsp; &nbsp;</text>
+
                 }
             }
         }
-    </select>
-    <br />
-    <label for="StateIDF">State Name</label>
-    <select class="form-control" name="StateIDF" id="StateIDF" onchange="GetCity()">
-        <option value="0">-- Select State --</option>
-    </select>
-    <br />
-    <label for="CityIDF">City Name</label>
-    <select class="form-control" name="CityIDF" id="CityIDF">
-        <option value="0">-- Select City --</option>
-    </select>
-    <br />
-
-    <label for="EmployeeName">Name</label>
-    <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" placeholder="Enter Employee Name" maxlength="70" onkeydown="return /[a-z\s]/i.test(event.key)" />
-    <br />
-    <label for="EmployeeAge">Age</label>
-    <input type="text" class="form-control" id="EmployeeAge" name="EmployeeAge" placeholder="Enter Employee Age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" />
-    <br />
-    <label for="EmployeeEmail">Email</label>
-    <input type="text" class="form-control" id="EmployeeEmail" name="EmployeeEmail" placeholder="Enter Employee Email" />
-    <br />
-    <label for="EmployeeMobileNumber">Mobile Number</label>
-    <input type="text" class="form-control" id="EmployeeMobileNumber" name="EmployeeMobileNumber" placeholder="Enter EmployeeMobile Number" maxlength="10"
-           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-    <br />
-    <label for="EmployeeGender">Gender</label><br />
-    <input type="radio" name="Gender" value="1" id="EmployeeGender" />&nbsp;Male&nbsp;&nbsp;
-    <input type="radio" name="Gender" value="0" id="EmployeeGender" />&nbsp;Female
-    <br />
-    <label for="EmployeeDomain">Domain</label>
-    <input type="text" class="form-control" id="EmployeeDomain" name="EmployeeDomain" placeholder="Enter Employee Domain" maxlength="30" onkeydown="return /[a-z\s]/i.test(event.key)" />
-    <br />
-    <label for="JobExperienceIDF">Job Experience</label>
-    <select class="form-control" name="JobExperienceIDF" id="JobExperienceIDF">
-        <option value="0">-- Select Job Experience --</option>
-        @{
-            if (ViewBag.lstJobExperience != null)
-            {
-                foreach (SQLClass.JobExperienceEmployeeClass item in ViewBag.lstJobExperience)
-                {
-                    <option value="@item.JobExperienceIDP">@item.JobExperienceName</option>
-                }
-            }
-        }
-    </select>
-    <br />
-    <label for="SkillIDF">Skills</label><br />
-    <input type="checkbox" class="chkAllSkill" /> Select All <br />
-    @foreach (SQLClass.SkillEmployeeClass item in @ViewBag.lstSkill)
-    {
-        <input type="checkbox" class="chkSkill" value="@item.SkillIDP" name="SkillIDF" /><text>&nbsp;</text>@item.SkillName;
-        <text>&nbsp; &nbsp;</text>
-
-    }
-    <input type="hidden" id="chkSkillIDF" />
+    </div>
+    <div class="form-group">
+        <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+    </div>
 </div>
-<div class="form-group">
-    <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
-</div>
+
 
 <div class="row">
-    <table id="datatable" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Sr.No</th>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Email</th>
-                <th>Mobile Number</th>
-                <th>Gender</th>
-                <th>Country</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Skills</th>
-                <th>Job Experience</th>
-                <th>Work Domain</th>
-                <th>Status</th>
-                <th>Action</th>
-                <th>Created Date</th>
-            </tr>
-        </thead>
-        <tbody id="Data">
-        </tbody>
-    </table>
-</div>
+    <div class="col-md-12">
+        <div class="panel panel-default" style="margin-top:-61px;overflow: scroll;">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Email</th>
+                                    <th>Mobile Number</th>
+                                    <th>Gender</th>
+                                    <th>Country</th>
+                                    <th>State</th>
+                                    <th>City</th>
+                                    <th>Job Experience</th>
+                                    <th>Work Domain</th>
+                                    <th>Skills</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="Data">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <input type="hidden" id="CurrentPage" value="1" />
+                <div style="float: left;">
+                    <label class="form-label" style="padding-top:5px">
+                        Showing <span id="FirstRecord"></span> to <span id="LastRecord"></span> of <span id="TotalRecords"></span>
+                    </label>
+                </div>
+                <div style="float: right;text-align: right;">
+                    <button id="LeftEnd" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'LE')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>&nbsp;
+                    <button id="Left" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'L')"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+                    Page
+                    <input type="text" name="text" id="NavigationValue" value="1" class="form-control" style="width:10%;display:inline-block" />&nbsp; of <span id="TotalPages"></span> &nbsp;
+                    <button id="goBtn" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'C')">Go</button> &nbsp;
+                    <button id="Right" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'R')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>&nbsp;
+                    <button id="RightEnd" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'RE')"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End Row -->
 
 @section scripts{
+    <!-- js placed at the end of the document so the pages load faster -->
+    @*<script src="~/Content/js/jquery.js"></script>*@
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/pace.min.js"></script>
+    <script src="~/Content/js/wow.min.js"></script>
+    <script src="~/Content/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--Sweet Alert-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--DatePicker-->
+    <script src="~/Content/assets/timepicker/bootstrap-datepicker.js"></script>
+    <!-- Toastr -->
+    <script src="~/Content/assets/toastr/toastr.min.js"></script>
+
     <script>
         $(document).ready(function () {
-            GetData(10, 1)
+            GetData(5, 1, '')
         });
 
         var CountryIDF = '';
@@ -175,7 +224,48 @@
         });
 
 
-        function GetData(RowsPerPage, PageNumber) {
+        function GetData(RowsPerPage, PageNumber, NavigationType) {
+            var navValue = parseInt($("#NavigationValue").val());
+            var totalPage = parseInt($("#TotalPages").text());
+
+            if (NavigationType === 'L') {
+                if (navValue > 1) {
+                    PageNumber = navValue - 1;
+                }
+
+                $("#Left").removeClass("btn-info").addClass("btn-warning");
+                $("#LeftEnd, #goBtn, #Right, #RightEnd").removeClass("btn-warning").addClass("btn-info");
+            }
+            else if (NavigationType === 'LE') {
+                PageNumber = 1;
+
+                $("#LeftEnd").removeClass("btn-info").addClass("btn-warning");
+                $("#Left, #goBtn, #Right, #RightEnd").removeClass("btn-warning").addClass("btn-info");
+            }
+            else if (NavigationType === 'C') {
+                PageNumber = navValue;
+
+                $("#goBtn").removeClass("btn-info").addClass("btn-warning");
+                $("#Left, #LeftEnd, #Right, #RightEnd").removeClass("btn-warning").addClass("btn-info");
+            }
+            else if (NavigationType === 'R') {
+                if (totalPage > navValue)
+                    PageNumber = navValue + 1;
+                else
+                    PageNumber = totalPage;
+
+                $("#Right").removeClass("btn-info").addClass("btn-warning");
+                $("#Left, #LeftEnd, #goBtn, #RightEnd").removeClass("btn-warning").addClass("btn-info");
+            }
+            else if (NavigationType === 'RE') {
+                PageNumber = totalPage;
+
+                $("#RightEnd").removeClass("btn-info").addClass("btn-warning");
+                $("#Left, #LeftEnd, #goBtn, #Right").removeClass("btn-warning").addClass("btn-info");
+            }
+
+            $("#NavigationValue, #CurrentPage").val(PageNumber);
+
             var mData = {
                 RowsPerPage: RowsPerPage,
                 PageNumber: PageNumber
@@ -188,6 +278,12 @@
                 dataType: "json",
                 success: function (mRes) {
                     var obj = JSON.parse(mRes);
+
+                    $("#FirstRecord").text(obj[0].FirstRecord);
+                    $("#LastRecord").text(obj[0].LastRecord);
+                    $("#TotalRecords").text(obj[0].TotalRecords);
+                    $("#TotalPages").text(obj[0].TotalPage);
+
                     var objData = obj[0].Data;
                     var iHTML = "";
 
@@ -198,19 +294,19 @@
                         for (var i = 0; i < objData.length; i++) {
                             iHTML += "<tr>";
                             iHTML += "<td style='width:2%'>" + objData[i].SrNo + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeName + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeAge + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeEmail + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeMobileNumber + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeGender + "</td>";
+                            iHTML += "<td style='width:30%'>" + objData[i].EmployeeName + "</td>";
+                            iHTML += "<td style='width:5%'>" + objData[i].EmployeeAge + "</td>";
+                            iHTML += "<td style='width:30%'>" + objData[i].EmployeeEmail + "</td>";
+                            iHTML += "<td style='width:15%'>" + objData[i].EmployeeMobileNumber + "</td>";
+                            iHTML += "<td style='width:3%'>" + objData[i].EmployeeGender + "</td>";
                             iHTML += "<td style='width:12%'>" + objData[i].CountryName + "</td>";
                             iHTML += "<td style='width:12%'>" + objData[i].StateName + "</td>";
                             iHTML += "<td style='width:12%'>" + objData[i].CityName + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].JobExperienceName + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].SkillName + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].EmployeeDomain + "</td>";
+                            iHTML += "<td style='width:15%'>" + objData[i].JobExperienceName + "</td>";
+                            iHTML += "<td style='width:25%'>" + objData[i].SkillName + "</td>";
+                            iHTML += "<td style='width:20%'>" + objData[i].EmployeeDomain + "</td>";
                             iHTML += '<td style="width:12%"><button class="btn btn-' + (objData[i].IsActive == true ? "success" : "danger") + '" onclick="GeneralAction(&quot;' + objData[i].EmployeeIDP + '&quot;,&quot;1&quot;)">&nbsp;' + (objData[i].IsActive == true ? "Active" : "DeActive") + '</button></td>';
-                            iHTML += '<td style="width:18%"><button class="btn btn-info w-sd" id=' + objData[i].EmployeeIDP + ' onclick="Get(' + objData[i].EmployeeIDP + ')">Edit</button>';
+                            iHTML += '<td style="width:18%"><button class="btn btn-info w-sd" id=' + objData[i].EmployeeIDP + ' onclick="Get(' + objData[i].EmployeeIDP + ')">Edit</button><br/>';
                             iHTML += '&nbsp;<button id="DeleteRecord" class="btn btn-danger' + '" onclick="GeneralAction(&quot;' + objData[i].EmployeeIDP + '&quot;,&quot;2&quot;)">&nbsp;' + (objData[i].IsDelete == true ? "Delete" : "Delete") + '</button></td>';
                             iHTML += "<td style='width:12%'>" + objData[i].CreatedDateTime + "</td>";
                             iHTML += "</tr>";
@@ -221,8 +317,52 @@
             })
         }
 
-        function Save() {
+        function Get(id) {
+            var mData = { EmployeeIDP: id }
+            $.ajax({
+                type: "POST",
+                url: "/EmployeeMaster/EmployeeMaster_Get_GetByID",
+                data: JSON.stringify(mData),
+                contentType: "application/json",
+                dataType: "json",
+                success: function (mRes) {
+                    var obj = JSON.parse(mRes)
+                    $("#EmployeeIDP").val(obj[0].EmployeeIDP);
+                    $("#CountryIDF").val(obj[0].CountryIDF).trigger('change');
+                    StateIDF = obj[0].StateIDF;
+                    CityIDF = obj[0].CityIDF;
+                    $("#EmployeeName").val(obj[0].EmployeeName);
+                    $("#EmployeeAge").val(obj[0].EmployeeAge);
+                    $("#EmployeeEmail").val(obj[0].EmployeeEmail);
+                    $("#EmployeeMobileNumber").val(obj[0].EmployeeMobileNumber);
 
+                    if ($("#EmployeeGenderM").val() == obj[0].EmployeeGender) {
+                        $("#EmployeeGenderM").prop("checked", true);
+                    }
+                    if ($("#EmployeeGenderF").val() == obj[0].EmployeeGender) {
+                        $("#EmployeeGenderF").prop("checked", true);
+                    }
+                    $("#EmployeeDomain").val(obj[0].EmployeeDomain);
+                    $("#JobExperienceIDF").val(obj[0].JobExperienceIDF).trigger('change');
+
+                    if (obj[0].SkillIDF != null && obj[0].SkillIDF != "") {
+                        var str = obj[0].SkillIDF.split(',');
+
+                        $('.chkSkill').each(function () {
+                            this.checked = false;
+                            for (var i = 0; i < str.length; i++) {
+                                if ($(this).val() == str[i]) {
+                                    this.checked = true;
+                                }
+                            }
+                        });
+                    }
+                    $("#btnSubmit").text("Edit");
+                }
+            });
+        }
+
+        function Save() {
             if ($("#EmployeeEmail").val() != "") {
                 if (!validateEmail($("#EmployeeEmail").val())) {
                     alert('Please Enter Valid Email e.g abc@domain.com');
@@ -236,9 +376,30 @@
                     return false;
                 }
             }
+            if ($("#EmployeeIDP").val() != 0) {
+                var str = "";
+                $('.chkSkill').each(function () {
+                    if (this.checked) {
+                        str += $(this).val() + ',';
+                    }
+                });
+                var lastChar = str.slice(-1);
+                if (lastChar == ',') {
+                    str = str.slice(0, -1);
+                }
+                console.log(str);
+                $('#chkSkillIDF').val(str);
+            }
+            var Gender = null;
+
+            $("input:radio[name=Gender]").each(function () {
+                if (this.checked) {
+                    Gender = this.value;
+                }
+            });
 
             var mData = {
-                EmployeeIDP: $("#EmpoloyeeIDP").val(),
+                EmployeeIDP: $("#EmployeeIDP").val(),
                 CountryIDF: $("#CountryIDF").val(),
                 StateIDF: $("#StateIDF").val(),
                 CityIDF: $("#CityIDF").val(),
@@ -246,7 +407,7 @@
                 EmployeeAge: $("#EmployeeAge").val(),
                 EmployeeEmail: $("#EmployeeEmail").val(),
                 EmployeeMobileNumber: $("#EmployeeMobileNumber").val(),
-                EmployeeGender: $("#EmployeeGender").val(),
+                EmployeeGender: Gender,
                 EmployeeDomain: $("#EmployeeDomain").val(),
                 JobExperienceIDF: $("#JobExperienceIDF").val(),
                 SkillIDF: $("#chkSkillIDF").val()
@@ -259,7 +420,7 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.Outval == 1) {
-                        GetData(10, 1);
+                        GetData(5, $("#CurrentPage").val(), '');
                         $("#btnSubmit").text("Save");
                         ClearControls();
                         alert(result.Outmsg);
@@ -280,13 +441,22 @@
             $("#EmployeeAge").val("");
             $("#EmployeeEmail").val("");
             $("#EmployeeMobileNumber").val("");
-            $("#EmployeeGender").val("");
+            $("#EmployeeGender").val(0);
+            $("input:radio[name=Gender]").each(function () {
+                this.checked = false;
+            });
             $("#EmployeeDomain").val("");
             $("#JobExperienceIDF").val(0);
-            $('#chkSkillIDF').val('')
+            $('.chkSkill').each(function () {
+                this.checked = false;
+            });
+            $("input:checkbox[name=chkSkillAll]").each(function () {
+                this.checked = false;
+            });
         }
 
         function GetState() {
+            debugger;
             var mData = {
                 CountryIDP: $("#CountryIDF").val()
             };
@@ -304,10 +474,11 @@
                         for (var i = 0; i < mRes.length; i++) {
                             if (mRes[i].StateIDP == StateIDF) {
                                 iHTML += '<option value="' + mRes[i].StateIDP + '" selected>' + mRes[i].StateName + '</option>'
-                                GetCity();
+                                GetCity(mRes[i].StateIDP);
                             }
                             else {
                                 iHTML += '<option value="' + mRes[i].StateIDP + '">' + mRes[i].StateName + '</option>';
+
                             }
                         }
                     }
@@ -316,9 +487,10 @@
             });
         }
 
-        function GetCity() {
+        function GetCity(StateIDF) {
+            debugger;
             var mData = {
-                StateIDP: $("#StateIDF").val()
+                StateIDP: StateIDF == '' ? $("#StateIDF").val() : StateIDF
             };
             $.ajax({
                 type: "POST",
@@ -343,6 +515,40 @@
                     $("#CityIDF").html(iHTML);
                 }
             });
+        }
+
+        function GeneralAction(id, ActionType) {
+            var Id = {
+                EmployeeIDP: id,
+                ActionType: ActionType
+            };
+            var check;
+            if (ActionType == 1) {
+                check = confirm("Are you sure want to change a staus?");
+            }
+            else {
+                check = confirm("Are you sure want to delete?");
+            }
+            if (check) {
+                $.ajax({
+                    type: "POST",
+                    data: JSON.stringify(Id),
+                    url: "/EmployeeMaster/EmployeeMaster_GeneralAction",
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (mRes) {
+                        if (mRes.Outval == 1) {
+                            GetData(5, $("#CurrentPage").val(), '');
+                            alert(mRes.Outmsg);
+                        }
+                        else {
+                            alert(mRes.Outmsg);
+                        }
+                    }
+
+                });
+            }
+            return true;
         }
     </script>
 }

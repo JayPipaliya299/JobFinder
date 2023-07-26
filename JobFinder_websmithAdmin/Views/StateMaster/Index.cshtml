@@ -21,7 +21,7 @@
     </select>
     <br />
     <label for="StateName">State Name</label>
-    <input type="text" class="form-control" id="StateName" name="StateName" placeholder="Enter State Name" maxlength="50" onkeydown="return /[a-z]/i.test(event.key)"/>
+    <input type="text" class="form-control" id="StateName" name="StateName" placeholder="Enter State Name" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)"/>
 </div>
 <div class="form-group">
     <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>

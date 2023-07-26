@@ -19,6 +19,13 @@ namespace SQLLogic
             });
         }
 
+        public object EmployeeMaster_Get_GetByID(int EmployeeIDP)
+        {
+            return new SqlHelper().GetJsonObject("EmployeeMaster_Get_GetByID", new object[,]
+            {
+                {"EmployeeIDP",EmployeeIDP }
+            });
+        }
         public MEMBERS.SQLReturnMessageNValue EmployeeMaster_Insert_Update(EmployeeMasterClass oClass)
         {
             return new SqlHelper().ExecuteProceduerWithMessageNValue("EmployeeMaster_Insert_Update", new object[,]
@@ -36,6 +43,16 @@ namespace SQLLogic
                 , {"SkillIDF", oClass.SkillIDF}
                 , {"EmployeeDomain", oClass.EmployeeDomain}
                 , {"UserIDF", oClass.CreatedBy}
+            });
+        }
+
+        public MEMBERS.SQLReturnMessageNValue EmployeeMaster_GeneralAction(int EmployeeIDP,int ActionType,Guid UserIDF)
+        {
+            return new SqlHelper().ExecuteProceduerWithMessageNValue("EmployeeMaster_GeneralAction", new object[,]
+            {
+                {"EmployeeIDP",EmployeeIDP },
+                {"ActionType",ActionType},
+                {"UserIDF",UserIDF}
             });
         }
     }

@@ -4,8 +4,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/bootstrap-reset.css" rel="stylesheet">
+
+    <!--Animation css-->
+    <link href="~/Content/css/animate.css" rel="stylesheet">
+
+    <!--Icon-fonts css-->
+    <link href="~/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/assets/ionicon/css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/Content/assets/material-design-iconic-font/css/material-design-iconic-font.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/helper.css" rel="stylesheet">
+
+    <!-- Toastr -->
+    <link href="~/Content/assets/toastr/toastr.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("styles", required: false)
 
 </head>
 <body>
@@ -22,8 +42,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     <li>@Html.ActionLink("Country", "Index", "CountryMaster")</li>
                     <li>@Html.ActionLink("State", "Index", "StateMaster")</li>
                     <li>@Html.ActionLink("City", "Index", "CityMaster")</li>
@@ -42,7 +62,27 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+    <!-- Counter-up -->
+    <script src="~/Content/js/waypoints.min.js" type="text/javascript"></script>
+    <script src="~/Content/js/jquery.counterup.min.js" type="text/javascript"></script>
 
+    <!-- sparkline -->
+    <script src="~/Content/assets/sparkline-chart/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="~/Content/assets/sparkline-chart/chart-sparkline.js" type="text/javascript"></script>
+
+    <!-- skycons -->
+    <script src="~/Content/js/skycons.min.js" type="text/javascript"></script>
+
+    <script src="~/Content/js/jquery.app.js"></script>
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/modernizr.min.js"></script>
+    <script src="~/Content/js/pace.min.js"></script>
+    <script src="~/Content/js/wow.min.js"></script>
+    <script src="~/Content/js/jquery.scrollTo.min.js"></script>
+    <script src="~/Content/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    </script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

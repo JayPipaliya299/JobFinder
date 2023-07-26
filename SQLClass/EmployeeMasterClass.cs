@@ -13,7 +13,7 @@ namespace SQLClass
         public int EmployeeAge { get; set; }
         public string EmployeeEmail { get; set; }
         public string EmployeeMobileNumber { get; set; }
-        public string EmployeeGender { get; set; }
+        public int EmployeeGender { get; set; }
         public int CountryIDF { get; set; }
         public int StateIDF { get; set; }
         public int CityIDF { get; set; }

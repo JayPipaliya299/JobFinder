@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace JobFinder_websmithAdmin.Controllers
 {
+    [Authorize]
     public class StateMasterController : Controller
     {
         // GET: StateMaster
