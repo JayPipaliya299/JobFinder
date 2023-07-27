@@ -529,10 +529,11 @@
                 contentType: "application/json",
                 dataType: "json",
                 success: function (mRes) {
+                    
                     var iHTML = '';
                     iHTML += '<option value="0">-- Select State --</option>'
 
-                    if (mRes.length > 0) {
+                    if (mRes != null && mRes != "" && mRes.length > 0) {
                         for (var i = 0; i < mRes.length; i++) {
                             if (mRes[i].StateIDP == StateIDF) {
                                 iHTML += '<option value="' + mRes[i].StateIDP + '" selected>' + mRes[i].StateName + '</option>'
@@ -565,7 +566,7 @@
                     var iHTML = '';
                     iHTML += '<option value="0">-- Select City --</option>'
 
-                    if (mRes.length > 0) {
+                    if (mRes != null && mRes != "" && mRes.length > 0) {
                         for (var i = 0; i < mRes.length; i++) {
                             if (mRes[i].CityIDP == CityIDF) {
                                 iHTML += '<option value="' + mRes[i].CityIDP + '" selected>' + mRes[i].CityName + '</option>'

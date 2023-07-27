@@ -35,8 +35,15 @@ namespace JobFinder_websmithAdmin.Controllers
             object lstState = new StateMasterLogic().StateMaster_Get_GetStateByCountryIDP(CountryIDP);
             List<StateMasterClass> lstStateModel = JsonConvert.DeserializeObject<List<StateMasterClass>>(lstState.ToString());
             ViewBag.lstState = lstStateModel;
+            if(lstStateModel != null && lstStateModel.Count > 0)
+            {
+                return Json(lstStateModel, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
 
-            return Json(lstStateModel, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -45,8 +52,14 @@ namespace JobFinder_websmithAdmin.Controllers
             object lstCity = new CityMasterLogic().CityMaster_Get_GetCityByStateIDP(StateIDP);
             List<CityMasterClass> lstCityModel = JsonConvert.DeserializeObject<List<CityMasterClass>>(lstCity.ToString());
             ViewBag.lstCity = lstCityModel;
-
-            return Json(lstCityModel, JsonRequestBehavior.AllowGet);
+            if (lstCityModel != null && lstCityModel.Count > 0)
+            {
+                return Json(lstCityModel, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
         }
 
         #region Get Data
