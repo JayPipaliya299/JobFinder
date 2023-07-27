@@ -3,89 +3,148 @@
     ViewBag.Title = "Index";
 }
 
-<div style="margin-bottom:8%;margin-top:5%;">
-    <div class="form-group">
-        <br />
-        <input type="hidden" name="EmployeeIDP" id="EmployeeIDP" value="0" />
-        <label for="CountryIDF">Country Name</label>
-        <select class="form-control" name="CountryIDF" id="CountryIDF" onchange="GetState()">
-            <option value="0">-- Select Country --</option>
-            @{
-                if (ViewBag.lstCountry != null)
-                {
-                    foreach (SQLClass.CountryStateClass item in ViewBag.lstCountry)
+<div class="row" style="margin-bottom:8%;margin-top:5%;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="hidden" name="EmployeeIDP" id="EmployeeIDP" value="0" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="CountryIDF">Country Name</label>
+            </div>
+            <div class="col-md-4">
+                <label for="StateIDF">State Name</label>
+            </div>
+            <div class="col-md-4">
+                <label for="CityIDF">City Name</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <select class="form-control" name="CountryIDF" id="CountryIDF" onchange="GetState()">
+                    <option value="0">-- Select Country --</option>
+                    @{
+                        if (ViewBag.lstCountry != null)
+                        {
+                            foreach (SQLClass.CountryStateClass item in ViewBag.lstCountry)
+                            {
+                                <option value="@item.CountryIDP">@item.CountryName</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" name="StateIDF" id="StateIDF" onchange="GetCity('')">
+                    <option value="0">-- Select State --</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" name="CityIDF" id="CityIDF">
+                    <option value="0">-- Select City --</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <br/>
+            <div class="col-md-4">
+                <label for="EmployeeName">Name</label>
+            </div>
+            <div class="col-md-4">
+                <label for="EmployeeAge">Age</label>
+            </div>
+            <div class="col-md-4">
+                <label for="EmployeeEmail">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" placeholder="Enter Employee Name" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="EmployeeAge" name="EmployeeAge" placeholder="Enter Employee Age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" />
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="EmployeeEmail" name="EmployeeEmail" placeholder="Enter Employee Email" maxlength="100" />
+            </div>
+        </div>
+        <div class="row">
+            <br/>
+            <div class="col-md-4">
+                <label for="EmployeeMobileNumber">Mobile Number</label>
+            </div>
+            <div class="col-md-4">
+                <label for="EmployeeGender">Gender</label>
+            </div>
+            <div class="col-md-4">
+                <label for="EmployeeDomain">Domain</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="EmployeeMobileNumber" name="EmployeeMobileNumber" placeholder="Enter EmployeeMobile Number" maxlength="20"
+                       oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+            </div>
+            <div class="col-md-4">
+                <input type="radio" name="Gender" value="1" id="EmployeeGenderM" />&nbsp;Male&nbsp;&nbsp;
+                <input type="radio" name="Gender" value="2" id="EmployeeGenderF" />&nbsp;Female
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="EmployeeDomain" name="EmployeeDomain" placeholder="Enter Employee Domain" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
+            </div>
+        </div>
+        <div class="row">
+            <br/>
+            <div class="col-md-4">
+                <label for="JobExperienceIDF">Job Experience</label>
+
+            </div>
+            <div class="col-md-4">
+                <label for="SkillIDF">Skills</label><br />
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <select class="form-control" name="JobExperienceIDF" id="JobExperienceIDF">
+                    <option value="0">-- Select Job Experience --</option>
+                    @{
+                        if (ViewBag.lstJobExperience != null)
+                        {
+                            foreach (SQLClass.JobExperienceEmployeeClass item in ViewBag.lstJobExperience)
+                            {
+                                <option value="@item.JobExperienceIDP">@item.JobExperienceName</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input type="hidden" id="chkSkillIDF" />
+                <input type="checkbox" class="chkAllSkill" name="chkSkillAll" /> Select All <br />
+                @{
+                    if (ViewBag.lstSkill != null)
                     {
-                        <option value="@item.CountryIDP">@item.CountryName</option>
+                        foreach (SQLClass.SkillEmployeeClass item in ViewBag.lstSkill)
+                        {
+                            <input type="checkbox" class="chkSkill" value="@item.SkillIDP" name="SkillIDF" /><text>&nbsp;</text>@item.SkillName;
+                            <text>&nbsp; &nbsp;</text>
+
+                        }
                     }
                 }
-            }
-        </select>
-        <br />
-        <label for="StateIDF">State Name</label>
-        <select class="form-control" name="StateIDF" id="StateIDF" onchange="GetCity('')">
-            <option value="0">-- Select State --</option>
-        </select>
-        <br />
-        <label for="CityIDF">City Name</label>
-        <select class="form-control" name="CityIDF" id="CityIDF">
-            <option value="0">-- Select City --</option>
-        </select>
-        <br />
-
-        <label for="EmployeeName">Name</label>
-        <input type="text" class="form-control" id="EmployeeName" name="EmployeeName" placeholder="Enter Employee Name" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
-        <br />
-        <label for="EmployeeAge">Age</label>
-        <input type="text" class="form-control" id="EmployeeAge" name="EmployeeAge" placeholder="Enter Employee Age" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')" />
-        <br />
-        <label for="EmployeeEmail">Email</label>
-        <input type="text" class="form-control" id="EmployeeEmail" name="EmployeeEmail" placeholder="Enter Employee Email" maxlength="100" />
-        <br />
-        <label for="EmployeeMobileNumber">Mobile Number</label>
-        <input type="text" class="form-control" id="EmployeeMobileNumber" name="EmployeeMobileNumber" placeholder="Enter EmployeeMobile Number" maxlength="20"
-               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
-        <br />
-        <label for="EmployeeGender">Gender</label><br />
-        <input type="radio" name="Gender" value="1" id="EmployeeGenderM" />&nbsp;Male&nbsp;&nbsp;
-        <input type="radio" name="Gender" value="2" id="EmployeeGenderF" />&nbsp;Female
-        <br />
-        <label for="EmployeeDomain">Domain</label>
-        <input type="text" class="form-control" id="EmployeeDomain" name="EmployeeDomain" placeholder="Enter Employee Domain" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
-        <br />
-        <label for="JobExperienceIDF">Job Experience</label>
-        <select class="form-control" name="JobExperienceIDF" id="JobExperienceIDF">
-            <option value="0">-- Select Job Experience --</option>
-            @{
-                if (ViewBag.lstJobExperience != null)
-                {
-                    foreach (SQLClass.JobExperienceEmployeeClass item in ViewBag.lstJobExperience)
-                    {
-                        <option value="@item.JobExperienceIDP">@item.JobExperienceName</option>
-                    }
-                }
-            }
-        </select>
-        <br />
-        <label for="SkillIDF">Skills</label><br />
-        <input type="hidden" id="chkSkillIDF" />
-        <input type="checkbox" class="chkAllSkill" name="chkSkillAll" /> Select All <br />
-        @{
-            if (ViewBag.lstSkill != null)
-            {
-                foreach (SQLClass.SkillEmployeeClass item in ViewBag.lstSkill)
-                {
-                    <input type="checkbox" class="chkSkill" value="@item.SkillIDP" name="SkillIDF" /><text>&nbsp;</text>@item.SkillName;
-                    <text>&nbsp; &nbsp;</text>
-
-                }
-            }
-        }
-    </div>
-    <div class="form-group">
-        <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+            </div>
+        </div>
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-md-12">
@@ -433,10 +492,12 @@
         }
 
         function ClearControls() {
+            CountryIDF = "";
+            StateIDF = "";
             $("#EmpoloyeeIDP").val(0);
-            $("#CountryIDF").val(0);
-            $("#StateIDF").val(0);
-            $("#CityIDF").val(0);
+            $("#CountryIDF").val(0).trigger('change');
+            $("#StateIDF").val(0).trigger('change');
+            $("#CityIDF").val(0).trigger('change');
             $("#EmployeeName").val("");
             $("#EmployeeAge").val("");
             $("#EmployeeEmail").val("");
@@ -446,13 +507,14 @@
                 this.checked = false;
             });
             $("#EmployeeDomain").val("");
-            $("#JobExperienceIDF").val(0);
+            $("#JobExperienceIDF").val(0).trigger('change');
             $('.chkSkill').each(function () {
                 this.checked = false;
             });
             $("input:checkbox[name=chkSkillAll]").each(function () {
                 this.checked = false;
             });
+            
         }
 
         function GetState() {
@@ -483,6 +545,7 @@
                         }
                     }
                     $("#StateIDF").html(iHTML);
+
                 }
             });
         }

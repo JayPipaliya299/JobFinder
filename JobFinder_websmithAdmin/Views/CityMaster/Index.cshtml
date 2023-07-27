@@ -3,29 +3,46 @@
     ViewBag.Title = "Index";
 }
 
-<div style="margin-bottom:8%;margin-top:5%;">
-    <div class="form-group">
-        <br />
-        <input type="hidden" name="CityIDP" id="CityIDP" value="0" />
-        <label for="StateIDF">State Name</label>
-        <select class="form-control" name="StateIDF" id="StateIDF">
-            <option value="0">-- Select State --</option>
-            @{
-                if (ViewBag.lstState != null)
-                {
-                    foreach (SQLClass.StateCityClass item in ViewBag.lstState)
-                    {
-                        <option value="@item.StateIDP">@item.StateName</option>
+<div class="row" style="margin-bottom:8%;margin-top:5%;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="hidden" name="CityIDP" id="CityIDP" value="0" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="StateIDF">State Name</label>
+            </div>
+            <div class="col-md-4">
+                <label for="CityName">City Name</label>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <select class="form-control" name="StateIDF" id="StateIDF">
+                    <option value="0">-- Select State --</option>
+                    @{
+                        if (ViewBag.lstState != null)
+                        {
+                            foreach (SQLClass.StateCityClass item in ViewBag.lstState)
+                            {
+                                <option value="@item.StateIDP">@item.StateName</option>
+                            }
+                        }
                     }
-                }
-            }
-        </select>
-        <br />
-        <label for="CityName">City Name</label>
-        <input type="text" class="form-control" id="CityName" name="CityName" placeholder="Enter City Name" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
-    </div>
-    <div class="form-group">
-        <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="CityName" name="CityName" placeholder="Enter City Name" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+            </div>
+        </div>
     </div>
 </div>
 <div class="row">
