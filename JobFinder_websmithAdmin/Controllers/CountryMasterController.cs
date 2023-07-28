@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace JobFinder_websmithAdmin.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CountryMasterController : Controller
     {
 

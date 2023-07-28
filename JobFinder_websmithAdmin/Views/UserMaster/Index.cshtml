@@ -7,34 +7,44 @@
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-12">
-                <input type="hidden" name="SkillIDP" id="SkillIDP" value="0" />
+                <input type="hidden" name="UserIDP" id="UserIDP" value="<%=UserIDP%>" />
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <label for="SkillName">Skill Name</label>
+                <lable for="UserName"><b>User Name</b></lable>
+            </div>
+            <div class="col-md-4">
+                <label for="RoleIDF">Role</label>
             </div>
             <div class="col-md-3">
 
             </div>
-            <div class="col-md-4">
-
-            </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <input type="text" class="form-control" id="SkillName" name="SkillName" placeholder="Enter Skill Name" maxlength="50" onkeydown="return /[a-z\s\.\+\/]/i.test(event.key)" />
+                <input type="text" class="form-control" id="UserName" name="UserName" readonly />
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" name="RoleIDF" id="RoleIDF">
+                    <option value="0" selected>-- Select Role --</option>
+                    @{
+                        if (ViewBag.lstRole != null)
+                        {
+                            foreach (SQLClass.RoleMasterClass item in ViewBag.lstRole)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    }
+                </select>
             </div>
             <div class="col-md-3">
                 <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
             </div>
-            <div class="col-md-4">
-
-            </div>
         </div>
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-md-12">
@@ -46,10 +56,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>SkillName</th>
-                                    <th>IsActive</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
                                     <th>Action</th>
-                                    <th>Created Date</th>
                                 </tr>
                             </thead>
                             <tbody id="Data">
@@ -99,6 +109,8 @@
             GetData(5, 1, '')
         });
 
+        var UserIDP;
+
         function GetData(RowsPerPage, PageNumber, NavigationType) {
             var navValue = parseInt($("#NavigationValue").val());
             var totalPage = parseInt($("#TotalPages").text());
@@ -144,10 +156,11 @@
             var mData = {
                 RowsPerPage: RowsPerPage,
                 PageNumber: PageNumber
-            };
+            }
+
             $.ajax({
                 type: "POST",
-                url: "/SkillMaster/SkillMaster_Get_GetAllPagging",
+                url: "/UserMaster/UserMaster_Get_GetAllPagging",
                 data: JSON.stringify(mData),
                 contentType: "application/json",
                 dataType: "json",
@@ -170,11 +183,10 @@
                         for (var i = 0; i < objData.length; i++) {
                             iHTML += "<tr>";
                             iHTML += "<td style='width:2%'>" + objData[i].SrNo + "</td>";
-                            iHTML += "<td style='width:12%'>" + objData[i].SkillName + "</td>";
-                            iHTML += '<td style="width:12%"><button class="btn btn-' + (objData[i].IsActive == true ? "success" : "danger") + '" onclick="GeneralAction(&quot;' + objData[i].SkillIDP + '&quot;,&quot;1&quot;)">&nbsp;' + (objData[i].IsActive == true ? "Active" : "DeActive") + '</button></td>';
-                            iHTML += '<td style="width:18%"><button class="btn btn-info w-sd" id=' + objData[i].SkillIDP + ' onclick="Get(' + objData[i].SkillIDP + ')">Edit</button>';
-                            iHTML += '&nbsp;<button id="DeleteRecord" class="btn btn-danger' + '" onclick="GeneralAction(&quot;' + objData[i].SkillIDP + '&quot;,&quot;2&quot;)">&nbsp;' + (objData[i].IsDelete == true ? "Delete" : "Delete") + '</button></td>';
-                            iHTML += "<td style='width:12%'>" + objData[i].CreatedDateTime + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].UserName + "</td>";
+                            iHTML += "<td style='width:12%'>" + objData[i].Email + "</td>"
+                            iHTML += "<td style='width:12%'>" + objData[i].RoleName + "</td>"
+                            iHTML += '<td style="width:10%"><button class="btn btn-' + (objData[i].IsRole == true ? "disabled" : "info") + '" id=' + objData[i].ID + ' onclick="Get(&quot;' + objData[i].ID + '&quot;)">Role</button>';
                             iHTML += "</tr>";
                         }
                         $("#Data").html(iHTML);
@@ -184,37 +196,38 @@
         }
 
         function Get(id) {
-            var mData = { SkillIDP: id };
+            debugger;
+            var mData = { ID: id }
             $.ajax({
                 type: "POST",
-                url: "/SkillMaster/SkillMaster_Get_GetByID",
+                url: "/UserMaster/UserMaster_Get_GetByID",
                 data: JSON.stringify(mData),
                 contentType: "application/json",
                 dataType: "json",
                 success: function (mRes) {
                     var obj = JSON.parse(mRes);
-                    $("#SkillIDP").val(obj[0].SkillIDP);
-                    $("#SkillName").val(obj[0].SkillName);
-                    $("#btnSubmit").text("Edit");
-                }
+                    $("#UserIDP").val(obj[0].Id);
+                    $("#UserName").val(obj[0].UserName);
+                },
             });
         }
 
         function Save() {
+            debugger;
             var mData = {
-                SkillIDP: $("#SkillIDP").val(),
-                SkillName: $("#SkillName").val(),
-            };
+                UserID: $("#UserIDP").val(),
+                RoleID: $("#RoleIDF").val(),
+            }
             $.ajax({
                 type: "POST",
-                url: "/SkillMaster/SkillMaster_Insert_Update",
                 data: JSON.stringify(mData),
+                url: "/UserMaster/UserRoleMaster_Insert",
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
                     if (result.Outval == 1) {
                         GetData(5, $("#CurrentPage").val(), '');
-                        $("#btnSubmit").text("Save");
+
                         ClearControls();
                         alert(result.Outmsg);
                     }
@@ -225,41 +238,10 @@
             });
         }
 
-        function GeneralAction(id, ActionType) {
-            var Id = {
-                SkillIDP: id,
-                ActionType: ActionType
-            };
-            var check;
-            if (ActionType == 1) {
-                check = confirm("Are you sure want to change a staus?");
-            }
-            else {
-                check = confirm("Are you sure want to delete?");
-            }
-            if (check) {
-                $.ajax({
-                    type: "POST",
-                    url: "/SkillMaster/SkillMaster_GeneralAction",
-                    data: JSON.stringify(Id),
-                    contentType: "application/json",
-                    dataType: "json",
-                    success: function (mRes) {
-                        if (mRes.Outval == 1) {
-                            GetData(5, $("#CurrentPage").val(), '');
-                            alert(mRes.Outmsg);
-                        }
-                        else {
-                            alert(mRes.Outmsg);
-                        }
-                    },
-                });
-            }
-        }
-
         function ClearControls() {
-            $("#SkillIDP").val(0);
-            $("#SkillName").val("");
+            $("#UserIDP").val("");
+            $("#UserName").val("");
+            $("#RoleIDF").val("");
         }
     </script>
 }

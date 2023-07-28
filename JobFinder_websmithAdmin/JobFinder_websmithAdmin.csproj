@@ -176,6 +176,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SkillMasterController.cs" />
     <Compile Include="Controllers\StateMasterController.cs" />
+    <Compile Include="Controllers\UserMasterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -861,6 +862,7 @@
     <Content Include="Views\CityMaster\Index.cshtml" />
     <Content Include="Views\SkillMaster\Index.cshtml" />
     <Content Include="Views\EmployeeMaster\Index.cshtml" />
+    <Content Include="Views\UserMaster\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

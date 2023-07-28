@@ -47,8 +47,10 @@
     <Compile Include="EmployeeMasterClass.cs" />
     <Compile Include="JobExperience.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleMasterClass.cs" />
     <Compile Include="SkillMasterClass.cs" />
     <Compile Include="StateMasterClass.cs" />
+    <Compile Include="UserRoleMasterClass.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
