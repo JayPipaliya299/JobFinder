@@ -23,5 +23,12 @@ namespace SQLLogic
                 {"ID",ID }
             });
         }
+        public object UserMaster_Check(string Email)
+        {
+            return new SqlHelper().GetJsonObject("UserMaster_Check", new object[,]
+            {
+                { "Email", Email }
+            });
+        }
     }
 }
