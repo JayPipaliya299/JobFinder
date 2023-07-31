@@ -29,7 +29,6 @@ namespace JobFinder_websmithAdmin.Controllers
             try
             {
                 object obj = new UserMasterLogic().UserMaster_Get_GetAllPagging(RowsPerPage, PageNumber);
-
                 return Json(obj.ToString(), JsonRequestBehavior.AllowGet);
 
             }
@@ -61,6 +60,7 @@ namespace JobFinder_websmithAdmin.Controllers
                     mRes.Outmsg = "Please select a role";
                     return Json(mRes, JsonRequestBehavior.AllowGet);
                 }
+
                 mRes = new UserRoleMasterLogic().UserRoleMaster_Insert(oClass);
             }
             catch(Exception ex)

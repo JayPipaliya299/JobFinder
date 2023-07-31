@@ -26,6 +26,7 @@ namespace SQLLogic
                 {"EmployeeIDP",EmployeeIDP }
             });
         }
+
         public MEMBERS.SQLReturnMessageNValue EmployeeMaster_Insert_Update(EmployeeMasterClass oClass)
         {
             return new SqlHelper().ExecuteProceduerWithMessageNValue("EmployeeMaster_Insert_Update", new object[,]

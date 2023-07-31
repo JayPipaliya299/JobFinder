@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Employee Master";
 }
 
 <div class="row" style="margin-bottom:8%;margin-top:5%;">
@@ -186,13 +186,13 @@
                     </label>
                 </div>
                 <div style="float: right;text-align: right;">
-                    <button id="LeftEnd" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'LE')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>&nbsp;
-                    <button id="Left" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'L')"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+                    <button id="LeftEnd" href="javascript:;" class="btn btn-primary" onclick="GetData(10,1,'LE')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></button>&nbsp;
+                    <button id="Left" href="javascript:;" class="btn btn-primary" onclick="GetData(10,1,'L')"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
                     Page
                     <input type="text" name="text" id="NavigationValue" value="1" class="form-control" style="width:10%;display:inline-block" />&nbsp; of <span id="TotalPages"></span> &nbsp;
-                    <button id="goBtn" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'C')">Go</button> &nbsp;
-                    <button id="Right" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'R')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>&nbsp;
-                    <button id="RightEnd" href="javascript:;" class="btn btn-primary" onclick="GetData(5,1,'RE')"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                    <button id="goBtn" href="javascript:;" class="btn btn-primary" onclick="GetData(10,1,'C')">Go</button> &nbsp;
+                    <button id="Right" href="javascript:;" class="btn btn-primary" onclick="GetData(10,1,'R')"><i class="fa fa-angle-right" aria-hidden="true"></i></button>&nbsp;
+                    <button id="RightEnd" href="javascript:;" class="btn btn-primary" onclick="GetData(10,1,'RE')"><i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -202,7 +202,6 @@
 
 @section scripts{
     <!-- js placed at the end of the document so the pages load faster -->
-    @*<script src="~/Content/js/jquery.js"></script>*@
     <script src="~/Content/js/bootstrap.min.js"></script>
     <script src="~/Content/js/pace.min.js"></script>
     <script src="~/Content/js/wow.min.js"></script>
@@ -216,7 +215,7 @@
 
     <script>
         $(document).ready(function () {
-            GetData(5, 1, '')
+            GetData(10, 1, '');
         });
 
         var CountryIDF = '';
@@ -281,7 +280,6 @@
                 $('#chkSkillIDF').val('');
             }
         });
-
 
         function GetData(RowsPerPage, PageNumber, NavigationType) {
             var navValue = parseInt($("#NavigationValue").val());
@@ -398,9 +396,11 @@
                     if ($("#EmployeeGenderM").val() == obj[0].EmployeeGender) {
                         $("#EmployeeGenderM").prop("checked", true);
                     }
+
                     if ($("#EmployeeGenderF").val() == obj[0].EmployeeGender) {
                         $("#EmployeeGenderF").prop("checked", true);
                     }
+
                     $("#EmployeeDomain").val(obj[0].EmployeeDomain);
                     $("#JobExperienceIDF").val(obj[0].JobExperienceIDF).trigger('change');
 
@@ -479,7 +479,7 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.Outval == 1) {
-                        GetData(5, $("#CurrentPage").val(), '');
+                        GetData(10, $("#CurrentPage").val(), '');
                         $("#btnSubmit").text("Save");
                         ClearControls();
                         alert(result.Outmsg);
@@ -518,7 +518,6 @@
         }
 
         function GetState() {
-            debugger;
             var mData = {
                 CountryIDP: $("#CountryIDF").val()
             };
@@ -546,13 +545,11 @@
                         }
                     }
                     $("#StateIDF").html(iHTML);
-
                 }
             });
         }
 
         function GetCity(StateIDF) {
-            debugger;
             var mData = {
                 StateIDP: StateIDF == '' ? $("#StateIDF").val() : StateIDF
             };
@@ -602,7 +599,7 @@
                     dataType: "json",
                     success: function (mRes) {
                         if (mRes.Outval == 1) {
-                            GetData(5, $("#CurrentPage").val(), '');
+                            GetData(10, $("#CurrentPage").val(), '');
                             alert(mRes.Outmsg);
                         }
                         else {

@@ -16,6 +16,7 @@ namespace SQLLogic
                 , { "PageNumber",PageNumber }
             });
         }
+
         public object UserMaster_Get_GetByID(string ID)
         {
             return new SqlHelper().GetJsonObject("UserMaster_Get_GetByID", new object[,]
@@ -23,6 +24,7 @@ namespace SQLLogic
                 {"ID",ID }
             });
         }
+
         public object UserMaster_Check(string Email)
         {
             return new SqlHelper().GetJsonObject("UserMaster_Check", new object[,]

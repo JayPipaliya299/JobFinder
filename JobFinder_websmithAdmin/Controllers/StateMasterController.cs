@@ -38,15 +38,7 @@ namespace JobFinder_websmithAdmin.Controllers
             }
         }
         #endregion Get Data
-
-        #region Get Data By ID
-        public JsonResult StateMaster_Get_GetByID(int StateIDP)
-        {
-            object data = new StateMasterLogic().StateMaster_Get_GetByID(StateIDP);
-            return Json(data.ToString(), JsonRequestBehavior.AllowGet);
-        }
-        #endregion Get Data By ID
-
+        
         #region Save Data
         [HttpPost]
         public ActionResult StateMaster_Insert_Update(StateMasterClass oClass)
@@ -78,6 +70,14 @@ namespace JobFinder_websmithAdmin.Controllers
             return Json(mRes, JsonRequestBehavior.AllowGet);
         }
         #endregion Save Data
+
+        #region Get Data By ID
+        public JsonResult StateMaster_Get_GetByID(int StateIDP)
+        {
+            object data = new StateMasterLogic().StateMaster_Get_GetByID(StateIDP);
+            return Json(data.ToString(), JsonRequestBehavior.AllowGet);
+        }
+        #endregion Get Data By ID
 
         #region Delete Data By ID
         [HttpPost]

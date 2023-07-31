@@ -50,6 +50,7 @@ namespace JobFinder_websmithAdmin.Controllers
                     mRes.Outmsg = "Please select a state";
                     return Json(mRes, JsonRequestBehavior.AllowGet);
                 }
+
                 if(string.IsNullOrEmpty(oClass.CityName))
                 {
                     mRes.Outval = 0;

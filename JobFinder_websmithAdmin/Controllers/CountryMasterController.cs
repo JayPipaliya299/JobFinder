@@ -21,6 +21,24 @@ namespace JobFinder_websmithAdmin.Controllers
             return View();
         }
 
+        #region Get Data
+        [HttpPost]
+        public JsonResult CountryMaster_Get_GetAllPagging(int RowsPerPage, int PageNumber)
+        {
+            try
+            {
+                object obj = new CountryMasterLogic().CountryMaster_Get_GetAllPagging(RowsPerPage, PageNumber);
+
+                return Json(obj.ToString(), JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json("Error :" + ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion Get Data
+
         #region Save Data
         [HttpPost]
         public ActionResult CountryMaster_Insert_Update(CountryMasterClass oClass)
@@ -47,24 +65,6 @@ namespace JobFinder_websmithAdmin.Controllers
         }
         #endregion Save Data
 
-        #region Get Data
-        [HttpPost]
-        public JsonResult CountryMaster_Get_GetAllPagging(int RowsPerPage,int PageNumber)
-        {
-            try
-            {
-                object obj = new CountryMasterLogic().CountryMaster_Get_GetAllPagging(RowsPerPage, PageNumber);
-
-                return Json(obj.ToString(), JsonRequestBehavior.AllowGet);
-
-            }
-            catch(Exception ex)
-            {
-                return Json("Error :" + ex.Message, JsonRequestBehavior.AllowGet);
-            }
-        }
-        #endregion Get Data
-
         #region Get Data By ID
         public JsonResult CountryMaster_Get_GetByID(int CountryIDP)
         {
@@ -82,7 +82,6 @@ namespace JobFinder_websmithAdmin.Controllers
             {
                 Guid UserIDF = Guid.Parse(User.Identity.GetUserId());
                 mRes = new CountryMasterLogic().CountryMaster_GeneralAction(CountryIDP, ActionType, UserIDF);
-                
             }
             catch (Exception ex)
             {

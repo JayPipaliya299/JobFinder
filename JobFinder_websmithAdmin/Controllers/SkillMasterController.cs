@@ -35,14 +35,6 @@ namespace JobFinder_websmithAdmin.Controllers
         }
         #endregion Get Data
 
-        #region Get Data By ID
-        public JsonResult SkillMaster_Get_GetByID(int SkillIDP)
-        {
-            object data = new SkillMasterLogic().SkillMaster_Get_GetByID(SkillIDP);
-            return Json(data.ToString(), JsonRequestBehavior.AllowGet);
-        }
-        #endregion Get Data By ID
-
         #region Save Data
         [HttpPost]
         public ActionResult SkillMaster_Insert_Update(SkillMasterClass oClass)
@@ -56,6 +48,7 @@ namespace JobFinder_websmithAdmin.Controllers
                     mRes.Outmsg = "Please enter skill name";
                     return Json(mRes, JsonRequestBehavior.AllowGet);
                 }
+
                 oClass.CreatedBy = Guid.Parse(User.Identity.GetUserId());
                 mRes = new SkillMasterLogic().SkillMaster_Insert_Update(oClass);
             }
@@ -66,6 +59,14 @@ namespace JobFinder_websmithAdmin.Controllers
             return Json(mRes, JsonRequestBehavior.AllowGet);
         }
         #endregion Save Data
+
+        #region Get Data By ID
+        public JsonResult SkillMaster_Get_GetByID(int SkillIDP)
+        {
+            object data = new SkillMasterLogic().SkillMaster_Get_GetByID(SkillIDP);
+            return Json(data.ToString(), JsonRequestBehavior.AllowGet);
+        }
+        #endregion Get Data By ID
 
         #region Delete Data By ID
         [HttpPost]

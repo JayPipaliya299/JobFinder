@@ -26,6 +26,5 @@ namespace SQLClass
         public DateTime CreatedDateTime { get; set; }
         public Guid UpdatedBy { get; set; }
         public DateTime UpdatedDateTime { get; set; }
-
     }
 }
