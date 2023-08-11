@@ -24,9 +24,16 @@
                 <input type="text" class="form-control" id="CountryName" name="CountryName" placeholder="Enter Country Name" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
             </div>
             <div class="col-md-3">
-                <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+                    </div>
+                    <div class="col-md-4 btnCancel">
+
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
 
             </div>
         </div>
@@ -202,10 +209,10 @@
                     success: function (mRes) {
                         if (mRes.Outval == 1) {
                             GetData(10, $("#CurrentPage").val(), '');
-                            alert(mRes.Outmsg);
+                            toastr.success(mRes.Outmsg, 'success');
                         }
                         else {
-                            alert(mRes.Outmsg);
+                            toastr.warning(mRes.Outmsg, 'warning');
                         }
                     }
                 });
@@ -215,6 +222,7 @@
 
         function Get(id) {
             var mData = { CountryIDP: id }
+            var iHTML = '';
             $.ajax({
                 type: "POST",
                 url: "/CountryMaster/CountryMaster_Get_GetByID",
@@ -226,6 +234,8 @@
                     $("#CountryIDP").val(obj[0].CountryIDP);
                     $("#CountryName").val(obj[0].CountryName);
                     $("#btnSubmit").text("Edit");
+                    iHTML += '<button class="btn btn-danger w-sd" onclick="ClearControls()">Cancel</button>';
+                    $(".btnCancel").html(iHTML);
                 }
             });
         }
@@ -243,13 +253,13 @@
                 dataType: "json",
                 success: function (result) {
                     if (result.Outval == 1) {
-                        GetData(5, $("#CurrentPage").val(), '');
+                        GetData(10, $("#CurrentPage").val(), '');
                         $("#btnSubmit").text("Save");
                         ClearControls();
-                        alert(result.Outmsg);
+                        toastr.success(result.Outmsg,'success');
                     }
                     else {
-                        alert(result.Outmsg);
+                        toastr.warning(result.Outmsg,'warning');
                     }
                 }
             });
@@ -258,6 +268,8 @@
         function ClearControls() {
             $("#CountryIDP").val(0);
             $("#CountryName").val("");
+            $(".btnCancel").html('');
+            $("#btnSubmit").text("Save");
         }
     </script>
 }

@@ -40,7 +40,14 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+                    </div>
+                    <div class="col-md-4 btnCancel">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -195,6 +202,7 @@
 
         function Get(id) {
             var mData = { ID: id }
+            var iHTML = '';
             $.ajax({
                 type: "POST",
                 url: "/UserMaster/UserMaster_Get_GetByID",
@@ -205,6 +213,8 @@
                     var obj = JSON.parse(mRes);
                     $("#UserIDP").val(obj[0].Id);
                     $("#UserName").val(obj[0].UserName);
+                    iHTML += '<button class="btn btn-danger w-sd" onclick="ClearControls()">Cancel</button>';
+                    $(".btnCancel").html(iHTML);
                 },
             });
         }
@@ -224,10 +234,10 @@
                     if (result.Outval == 1) {
                         GetData(10, $("#CurrentPage").val(), '');
                         ClearControls();
-                        alert(result.Outmsg);
+                        toastr.success(result.Outmsg,'success');
                     }
                     else {
-                        alert(result.Outmsg);
+                        toastr.warning(result.Outmsg,'warning');
                     }
                 },
             });
@@ -237,6 +247,7 @@
             $("#UserIDP").val("");
             $("#UserName").val("");
             $("#RoleIDF").val("");
+            $(".btnCancel").html('');
         }
     </script>
 }

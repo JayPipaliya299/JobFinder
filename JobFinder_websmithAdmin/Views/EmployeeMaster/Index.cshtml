@@ -84,7 +84,7 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <input type="text" class="form-control" id="EmployeeMobileNumber" name="EmployeeMobileNumber" placeholder="Enter EmployeeMobile Number" maxlength="20"
+                <input type="text" class="form-control" id="EmployeeMobileNumber" name="EmployeeMobileNumber" placeholder="Enter EmployeeMobile Number" maxlength="10"
                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
             </div>
             <div class="col-md-4">
@@ -140,7 +140,14 @@
                 }
             </div>
             <div class="col-md-3">
-                <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+                    </div>
+                    <div class="col-md-4 btnCancel">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -376,6 +383,7 @@
 
         function Get(id) {
             var mData = { EmployeeIDP: id }
+            var iHTML = '';
             $.ajax({
                 type: "POST",
                 url: "/EmployeeMaster/EmployeeMaster_Get_GetByID",
@@ -417,6 +425,8 @@
                         });
                     }
                     $("#btnSubmit").text("Edit");
+                    iHTML += '<button class="btn btn-danger w-sd" onclick="ClearControls()">Cancel</button>';
+                    $(".btnCancel").html(iHTML);
                 }
             });
         }
@@ -482,10 +492,10 @@
                         GetData(10, $("#CurrentPage").val(), '');
                         $("#btnSubmit").text("Save");
                         ClearControls();
-                        alert(result.Outmsg);
+                        toastr.success(result.Outmsg,'success');
                     }
                     else {
-                        alert(result.Outmsg);
+                        toastr.warning(result.Outmsg,'warning');
                     }
                 }
             });
@@ -514,7 +524,8 @@
             $("input:checkbox[name=chkSkillAll]").each(function () {
                 this.checked = false;
             });
-            
+            $(".btnCancel").html('');
+            $("#btnSubmit").text("Save");
         }
 
         function GetState() {
@@ -600,10 +611,10 @@
                     success: function (mRes) {
                         if (mRes.Outval == 1) {
                             GetData(10, $("#CurrentPage").val(), '');
-                            alert(mRes.Outmsg);
+                            toastr.success(mRes.Outmsg,'success');
                         }
                         else {
-                            alert(mRes.Outmsg);
+                            toastr.warning(mRes.Outmsg,'warning');
                         }
                     }
 

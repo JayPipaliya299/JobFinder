@@ -40,7 +40,12 @@
                 <input type="text" class="form-control" id="CityName" name="CityName" placeholder="Enter City Name" maxlength="50" onkeydown="return /[a-z\s]/i.test(event.key)" />
             </div>
             <div class="col-md-3">
-                <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+                <div class="col-md-4">
+                    <button type="button" id="btnSubmit" class="btn btn-success" onclick="Save();">Save</button>
+                </div>
+                <div class="col-md-4 btnCancel">
+
+                </div>
             </div>
         </div>
     </div>
@@ -194,6 +199,7 @@
 
         function Get(id) {
             var mData = { CityIDP: id }
+            var iHTML = '';
             $.ajax({
                 type: "POST",
                 url: "/CityMaster/CityMaster_Get_GetByID",
@@ -206,6 +212,8 @@
                     $("#StateIDF").val(obj[0].StateIDF).trigger('change');
                     $("#CityName").val(obj[0].CityName);
                     $("#btnSubmit").text("Edit");
+                    iHTML += '<button class="btn btn-danger w-sd" onclick="ClearControls()">Cancel</button>';
+                    $(".btnCancel").html(iHTML);
                 },
             })
         }
@@ -226,10 +234,10 @@
                         GetData(10, $("#CurrentPage").val(), '');
                         $("#btnSubmit").text("Save");
                         ClearControls();
-                        alert(result.Outmsg);
+                        toastr.success(result.Outmsg,'sucess');
                     }
                     else {
-                        alert(result.Outmsg);
+                        toastr.warning(result.Outmsg, 'warning');
                     }
                 }
             })
@@ -257,10 +265,10 @@
                     success: function (mRes) {
                         if (mRes.Outval == 1) {
                             GetData(10, $("#CurrentPage").val(), '');
-                            alert(mRes.Outmsg);
+                            toastr.success(mRes.Outmsg, 'success');
                         }
                         else {
-                            alert(mRes.Outmsg);
+                            toastr.warning(mRes.Outmsg, 'warning');
                         }
                     }
                 })
@@ -272,6 +280,8 @@
             $("#CityIDP").val(0);
             $("#StateIDF").val(0);
             $("#CityName").val("");
+            $(".btnCancel").html('');
+            $("#btnSubmit").text("Save");
         }
     </script>
 }
